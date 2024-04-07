@@ -1,8 +1,14 @@
 #ifndef S21_MATRIX_H
 #define S21_MATRIX_H
 
-#define SUCCESS 1
-#define FAILURE 0
+#include <stdlib.h>
+
+#define SUCCESS 0
+#define FAILURE 1
+#define CALC_ERR 2
+
+#define COMP_SUCCESS 1
+#define COMP_FAILURE 0
 
 typedef struct matrix_struct {
   double **matrix;
@@ -31,4 +37,9 @@ int s21_calc_complements(matrix_t *A, matrix_t *result);
 int s21_determinant(matrix_t *A, double *result);
 int s21_inverse_matrix(matrix_t *A, matrix_t *result);
 
+// Вспомогательные функции
+int matrix_print(matrix_t *A);
+int matrix_filler(matrix_t *A);
+int matrix_filler_random(matrix_t *A);
+double randfrom(double min, double max);
 #endif
