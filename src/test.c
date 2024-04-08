@@ -3,7 +3,7 @@
 
 int main() {
   printf("Создание матрицы 3x3:\n");
-  matrix_t result1;
+  matrix_t result1 = malloc(sizeof());
   matrix_t result3;
   int error1 = s21_create_matrix(3, 3, &result1);
   int error3 = s21_create_matrix(3, 3, &result3);
@@ -27,8 +27,8 @@ int main() {
     printf("Результат-матрица (не изменяется при вычислении определителя):\n");
     matrix_print(&result3);
 
-    s21_remove_matrix(&result1);
-    s21_remove_matrix(&result3);
+    s21_remove_matrix(result1);
+    s21_remove_matrix(result3);
   } else {
     printf("Не удалось создать матрицу\n");
   }

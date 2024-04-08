@@ -1,14 +1,22 @@
 #include "../s21_matrix.h"
 
-#include <stdio.h>
+/*
+  Высчитывает определитель 
+
+  параметры:
+  - matrix_t *A = Матрица
+  - *result = определитель
+
+  возвращает:
+  0 - хорошо
+  1 - плохо
+  2 - ошибка вычислений
+
+*/
 int s21_determinant(matrix_t *A, double *result) {
+  if(A->columns != A->rows){
+    return FAILURE;
+  }
 
-  if (A->columns != A->rows) return FAILURE;
-
-  if (A->rows == 1)
-    *result = A->matrix[0][0];
-  else
-    *result = matrix_determ(A, A->rows);
-
-  return SUCCESS;
+  
 }
