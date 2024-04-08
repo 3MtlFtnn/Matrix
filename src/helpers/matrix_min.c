@@ -3,12 +3,12 @@
 // i -строка; j - столбец
 int matrix_min(matrix_t *A, matrix_t *result, int row, int col) {
   if (A != NULL) {
-    for (int i = A->rows; i <= A->rows; i++) {
+    for (int i = 0; i < A->rows; i++) {
       int min_row = i;
       if (i > row) {
         min_row--;
       }
-      for (int j = A->columns; j <= A->columns; j++) {
+      for (int j = 0; j < A->columns; j++) {
         int min_col = j;
         if (j > col) {
           min_col--;
@@ -21,5 +21,6 @@ int matrix_min(matrix_t *A, matrix_t *result, int row, int col) {
   } else {
     return FAILURE;
   }
+
   return SUCCESS;
 }
