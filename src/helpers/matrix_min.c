@@ -1,26 +1,17 @@
 #include "../s21_matrix.h"
 #include <stdio.h>
-// i -строка; j - столбец
-int matrix_min(matrix_t *A, matrix_t *result, int row, int col) {
+void matrix_min(double **A, double **result, int minrow, int mincol, int size) {
   if (A != NULL) {
-    for (int i = 0; i < A->rows; i++) {
-      int min_row = i;
-      if (i > row) {
-        min_row--;
-      }
-      for (int j = 0; j < A->columns; j++) {
-        int min_col = j;
-        if (j > col) {
-          min_col--;
+    for(int row = 0, x = 0; row<size;row++){
+        for(int col = 0, y = 0; col < size; col++){
+            if(row!=minrow && col!=mincol){
+                result[x][y++] = A[row][col];
+                if(y == size - 1){
+                    y = 0;
+                    x++;
+                }
+            }
         }
-        if (i != row && j != col) {
-          result->matrix[min_row][min_col] = A->matrix[i][j];
-        }
-      }
     }
-  } else {
-    return FAILURE;
   }
-
-  return SUCCESS;
 }
