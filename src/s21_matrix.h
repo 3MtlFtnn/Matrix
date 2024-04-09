@@ -42,6 +42,6 @@ int matrix_print(matrix_t *A);
 int matrix_filler(matrix_t *A);
 int matrix_filler_random(matrix_t *A);
 void matrix_min(double **A, double **result, int minrow, int mincol, int size);
-double matrix_determ(matrix_t *A, int size);
+double help_determinant(matrix_t *A, int size);
 double randfrom(double min, double max);
 #endif
