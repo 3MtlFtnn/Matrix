@@ -37,10 +37,10 @@ double help_determinant(matrix_t *A, int size) {
     double answer = 0;
     int sign = 1;
     matrix_t *temp = malloc(sizeof(double **));
-    s21_create_matrix(size - 1, size - 1, temp);
+    s21_create_matrix(size, size, temp);
 
-    for (int i = 0; i < A->rows; i++){
-        matrix_min(A->matrix, temp->matrix, 0, i, A->rows);
+    for (int i = 0; i < size; i++){
+        matrix_min(A->matrix, temp->matrix, 0, i, size);
         answer += sign* A->matrix[0][i] * help_determinant(temp, size-1);
         sign*=-1;
     }
