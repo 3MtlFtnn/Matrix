@@ -17,7 +17,7 @@ int matrix_filler_random(matrix_t *A) {
 
     for (int i = 0; i < A->rows; i++) {
       for (int j = 0; j < A->columns; j++) {
-        A->matrix[i][j] = randfrom(-1.0, 1.0);
+        A->matrix[i][j] = randfrom(1, 2);
       }
     }
     return SUCCESS;

@@ -4,7 +4,7 @@
 int main() {
     printf("Создание матрицы 3x3:\n");
     matrix_t *result1 = malloc(sizeof(double **));
-    int error1 = s21_create_matrix(4,4, result1);
+    int error1 = s21_create_matrix(3,3, result1);
     printf("%d\n", error1);
 
     matrix_filler_random(result1);
@@ -13,7 +13,7 @@ int main() {
 
     printf("\n");
 
-    double determ = 0.0;
+    double determ;
     int sub_flag = s21_determinant(result1,&determ);
     printf("результат: %d\n", sub_flag);
     printf("Ответ пон: %f\n",determ);

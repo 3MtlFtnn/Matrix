@@ -6,44 +6,56 @@
 
   параметры:
   - matrix_t *A = Матрица
-  - *result = определитель
+  - double *result = определитель
 
   возвращает:
-  0 - хорошо
-  1 - плохо
-  2 - ошибка вычислений
-
+  0 - Отработал без ошибок
+  1 - На вход подана неверная матрица
 */
-
 int s21_determinant(matrix_t *A, double *result) {
-  if (A==NULL){
-   return FAILURE;
-  }
-  if (A->columns != A->rows){
-    return FAILURE;
-  }
-  if (A->rows == 1){
-    *result = A->matrix[0][0];
-  }
-  else if(A->rows == 2){
-      *result = (A->matrix[0][0] * A->matrix[1][1]) - (A->matrix[0][1] * A->matrix[1][0]);
-  }else{
-      *result = help_determinant(A, A->rows);
-  }
-
-  return SUCCESS;
-}
-double help_determinant(matrix_t *A, int size) {
-    double answer = 0;
-    int sign = 1;
-    matrix_t *temp = malloc(sizeof(double **));
-    s21_create_matrix(size, size, temp);
-
-    for (int i = 0; i < size; i++){
-        matrix_min(A->matrix, temp->matrix, 0, i, size);
-        answer += sign* A->matrix[0][i] * help_determinant(temp, size-1);
-        sign*=-1;
+  int flag = 0;
+    if (A->rows == A->columns) {
+      *result = help_get_determinant(A);
+    } else {
+      flag = 1;
     }
-    s21_remove_matrix(temp);
-    return answer;
+  return flag;
+}
+
+double help_get_determinant(matrix_t *A) {
+  double flag = 0.0;
+  if (A->rows == 1) {
+    flag = A->matrix[0][0];
+  } else {
+    matrix_t tmp = {0};
+    s21_create_matrix(A->rows - 1, A->columns - 1, &tmp);
+    for (int i = 0; i < A->columns; i++) {
+      s21_get_matrix(0, i, A, &tmp);
+      if (i % 2) {
+        flag -= A->matrix[0][i] * help_get_determinant(&tmp);
+      } else {
+        flag += A->matrix[0][i] * help_get_determinant(&tmp);
+      }
+    }
+    //s21_remove_matrix(&tmp);
+  }
+  return flag;
+}
+void s21_get_matrix(int row, int col, matrix_t *A, matrix_t *result) {
+  int m_row = 0;
+  int m_col = 0;
+  for (int i = 0; i < A->rows; i++) {
+    if (i == row) {
+      continue;
+    }
+    m_col = 0;
+    for (int j = 0; j < A->columns; j++) {
+      if (j == col) {
+        continue;
+      }
+      result->matrix[m_row][m_col] = A->matrix[i][j];
+      m_col++;
+    }
+    m_row++;
+  }
 }
