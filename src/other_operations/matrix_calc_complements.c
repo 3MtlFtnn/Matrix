@@ -1,24 +1,30 @@
 #include "../s21_matrix.h"
-#include <stdio.h>
+#include <math.h>
 /*
-int s21_calc_complements(matrix_t *A, matrix_t *result) {
-    if(A==NULL || (A->columns!=A->rows)){
-        return FAILURE;
-    }else {
-        s21_create_matrix(A->rows, A->columns, result);
-        if(A->rows!=1){
-            matrix_t temp ={0};
-            s21_create_matrix(A->rows, A->columns, &temp);
-            for (int sign = 0, x = 0; x < A->rows; x++){
-                for (int y = 0; y < A->columns ;y++){
-                    matrix_min(A->matrix, temp.matrix, x, y, A->rows);
-                    sign = ((x+y)%2==0) ? 1 : (-1);
-                    //result->matrix[x][y] = sign * calc
-                }
-            }
+    параметры:
+    matrix_t *A - исходная матрица
+    matrix_t *result - обработанная матрица
+
+    возвращает:
+    0 - OK
+    1 - Ошибка в вычислениях
+
+*/
+int s21_calc_complements(matrix_t *A, matrix_t *result){
+    int flag = 0;
+    if(A==NULL || (A->columns != A->rows)) return FAILURE;
+    s21_create_matrix(A->rows, A->rows, result);
+
+    for(int i = 0; i < A->rows; i++){
+        for(int j = 0; j < A->columns; j++){
+            matrix_t *temp = malloc(sizeof(double **));
+            double determ = 0;
+            s21_create_matrix(A->columns-1, A->rows-1, temp);
+            matrix_min(A->matrix, temp->matrix, i, j, A->rows);
+            s21_determinant(temp, &determ);
+            result->matrix[i][j] = pow(-1, (i+j))*determ;
+            s21_remove_matrix(temp);
         }
     }
-
-    return SUCCESS;
+    return flag;
 }
-*/

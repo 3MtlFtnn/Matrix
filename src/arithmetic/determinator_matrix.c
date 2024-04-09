@@ -15,7 +15,7 @@
 int s21_determinant(matrix_t *A, double *result) {
   int flag = 0;
     if (A->rows == A->columns) {
-      *result = help_get_determinant(A);
+      *result = matrix_get_determinant(A);
     } else {
       flag = 1;
     }
@@ -23,21 +23,23 @@ int s21_determinant(matrix_t *A, double *result) {
 }
 
 
-double help_get_determinant(matrix_t *A) {
+double matrix_get_determinant(matrix_t *A) {
   double flag = 0.0;
 
+  //матрица 1х1
   if (A->rows == 1) {
     flag = A->matrix[0][0];
   } else {
-    matrix_t *tmp = malloc(sizeof(matrix_t));
+    //для 2 и более порядка
+    matrix_t *tmp = malloc(sizeof(double **));
     s21_create_matrix(A->rows - 1, A->columns - 1, tmp);
 
     for (int i = 0; i < A->columns; i++) {
       matrix_min(A->matrix, tmp->matrix, 0, i, A->columns);
       if (i % 2) {
-        flag -= A->matrix[0][i] * help_get_determinant(tmp);
+        flag -= A->matrix[0][i] * matrix_get_determinant(tmp);
       } else {
-        flag += A->matrix[0][i] * help_get_determinant(tmp);
+        flag += A->matrix[0][i] * matrix_get_determinant(tmp);
       }
     }
     s21_remove_matrix(tmp);
