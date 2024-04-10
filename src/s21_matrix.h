@@ -41,7 +41,7 @@ int s21_inverse_matrix(matrix_t *A, matrix_t *result);
 int matrix_print(matrix_t *A);
 int matrix_filler(matrix_t *A);
 int matrix_filler_random(matrix_t *A);
-void matrix_min(double **A, double **result, int minrow, int mincol, int size);
+void matrix_minor(double **A, double **result, int minrow, int mincol, int size);
 double matrix_get_determinant(matrix_t *A);
 double randfrom(double min, double max);
 #endif

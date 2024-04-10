@@ -35,7 +35,7 @@ double matrix_get_determinant(matrix_t *A) {
     s21_create_matrix(A->rows - 1, A->columns - 1, tmp);
 
     for (int i = 0; i < A->columns; i++) {
-      matrix_min(A->matrix, tmp->matrix, 0, i, A->columns);
+      matrix_minor(A->matrix, tmp->matrix, 0, i, A->columns);
       if (i % 2) {
         flag -= A->matrix[0][i] * matrix_get_determinant(tmp);
       } else {
