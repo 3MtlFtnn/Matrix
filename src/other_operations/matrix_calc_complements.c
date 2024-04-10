@@ -20,7 +20,7 @@ int s21_calc_complements(matrix_t *A, matrix_t *result){
             matrix_t *temp = malloc(sizeof(double **));
             double determ = 0;
             s21_create_matrix(A->columns-1, A->rows-1, temp);
-            matrix_min(A->matrix, temp->matrix, i, j, A->rows);
+            matrix_minor(A, temp, i, j, A->rows);
             s21_determinant(temp, &determ);
             result->matrix[i][j] = pow(-1, (i+j))*determ;
             s21_remove_matrix(temp);

@@ -29,13 +29,15 @@ double matrix_get_determinant(matrix_t *A) {
   //матрица 1х1
   if (A->rows == 1) {
     flag = A->matrix[0][0];
+  //матрица 2х2
+  } else if(A->rows == 2) {
+    flag = matrix_determinant_2x2(A);
+  //матрица высшего порядка
   } else {
-    //для 2 и более порядка
     matrix_t *tmp = malloc(sizeof(double **));
     s21_create_matrix(A->rows - 1, A->columns - 1, tmp);
-
     for (int i = 0; i < A->columns; i++) {
-      matrix_minor(A->matrix, tmp->matrix, 0, i, A->columns);
+      matrix_minor(A, tmp, 0, i, A->columns);
       if (i % 2) {
         flag -= A->matrix[0][i] * matrix_get_determinant(tmp);
       } else {
@@ -45,4 +47,9 @@ double matrix_get_determinant(matrix_t *A) {
     s21_remove_matrix(tmp);
   }
   return flag;
+}
+
+double matrix_determinant_2x2(matrix_t *A){
+    double result = (A->matrix[0][0]*A->matrix[1][1]) - (A->matrix[0][1]*A->matrix[1][0]);
+    return result;
 }
