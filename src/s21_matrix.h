@@ -1,6 +1,8 @@
 #ifndef S21_MATRIX_H
 #define S21_MATRIX_H
 
+#include <math.h>
+#include <stdio.h>
 #include <stdlib.h>
 
 #define SUCCESS 0
@@ -39,7 +41,16 @@ int s21_inverse_matrix(matrix_t *A, matrix_t *result);
 
 // Вспомогательные функции
 int matrix_print(matrix_t *A);
+int matrix_copy(matrix_t *source, matrix_t *destination);
 int matrix_filler(matrix_t *A);
 int matrix_filler_random(matrix_t *A);
+double matrix_get_determinant(matrix_t *A);
+int matrix_divide_row(matrix_t *matrix, int pivot);
+int matrix_reduce_row(matrix_t *matrix);
+
 double randfrom(double min, double max);
+void matrix_minor(double **A, double **result, int minrow, int mincol,
+                  int size);
+void matrix_carry_row(matrix_t *multiplier_matrix, matrix_t *matrix, int pivot,
+                      int row_index);
 #endif
