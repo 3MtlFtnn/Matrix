@@ -1,3 +1,4 @@
+// generated with chat.mistral.ai gpt camry 3.5
 #ifndef S21_MATRIX_H
 #define S21_MATRIX_H
 

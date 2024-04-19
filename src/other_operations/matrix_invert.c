@@ -1,7 +1,7 @@
 #include "../s21_matrix.h"
 
 int s21_inverse_matrix(matrix_t *A, matrix_t *result) {
-  if (!((A == NULL) && (result == NULL))) {
+  if (A == NULL || (A->columns != A->rows) || (result == NULL) || (result->columns != result->rows)) {
     if (!(A->rows != A->columns)) {
       double det = 0;
       int status = s21_determinant(A, &det);

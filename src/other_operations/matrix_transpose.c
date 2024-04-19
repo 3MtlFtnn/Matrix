@@ -14,7 +14,7 @@
  */
 int s21_transpose(matrix_t *A, matrix_t *result) {
   /* !(если матрица A существует и матрица result существует) */
-  if (!((A == NULL) && (result == NULL))) {
+  if (A == NULL || (A->columns != A->rows) || (result == NULL) || (result->columns != result->rows)) {
     for (int i = 0; i < A->rows; ++i) {
       for (int j = 0; j < A->columns; ++j) {
         result->matrix[j][i] = A->matrix[i][j];

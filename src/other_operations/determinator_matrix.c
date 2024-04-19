@@ -13,7 +13,7 @@
 */
 int s21_determinant(matrix_t *A, double *result) {
   int flag = SUCCESS;
-  if (A->rows == A->columns) {
+  if (A == NULL || (A->columns != A->rows) || (result == NULL)){
     *result = matrix_get_determinant(A);
   } else {
     flag = FAILURE;
