@@ -12,7 +12,7 @@
 */
 int s21_calc_complements(matrix_t *A, matrix_t *result){
     int flag = 0;
-    if(A==NULL || (A->columns != A->rows)) return FAILURE;
+    if(A==NULL || (A->columns != A->rows) || result==NULL || result->columns!=result->rows) return FAILURE;
     s21_create_matrix(A->rows, A->rows, result);
 
     for(int i = 0; i < A->rows; i++){
